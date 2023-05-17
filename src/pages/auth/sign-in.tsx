@@ -14,7 +14,7 @@
 * Copyright 2022 Horizon UI (https://www.horizon-ui.com/)
 
 * Designed and Coded by Simmmple
-
+ 
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
