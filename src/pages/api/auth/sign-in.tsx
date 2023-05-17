@@ -1,11 +1,11 @@
 /* eslint-disable */
 /*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   
+	_   _  ___  ____  ___ ________  _   _   _   _ ___   
  | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| 
  | |_| | | | | |_) || |  / / | | |  \| | | | | || | 
  |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
  |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
-                                                                                                                                                                                                                                                                                                                                       
+																																																																																																																																																																			 
 =========================================================
 * Horizon UI - v1.1.0
 =========================================================
@@ -21,7 +21,7 @@
 
 */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // Chakra imports
 import {
 	Box,
@@ -38,12 +38,13 @@ import {
 	Text,
 	useColorModeValue
 } from '@chakra-ui/react';
+import { signIn } from 'next-auth/react'
 // Custom components
 import { HSeparator } from 'components/separator/Separator';
 import DefaultAuthLayout from 'layouts/auth/Default';
 // Assets
 import Link from 'next/link';
-import { FcGoogle } from 'react-icons/fc';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
 
@@ -58,8 +59,14 @@ export default function SignIn() {
 	const googleText = useColorModeValue('navy.700', 'white');
 	const googleHover = useColorModeValue({ bg: 'gray.200' }, { bg: 'whiteAlpha.300' });
 	const googleActive = useColorModeValue({ bg: 'secondaryGray.300' }, { bg: 'whiteAlpha.200' });
-	const [ show, setShow ] = React.useState(false);
+	const githubBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.200');
+	const githubText = useColorModeValue('navy.700', 'white');
+	const githubHover = useColorModeValue({ bg: 'gray.200' }, { bg: 'whiteAlpha.300' });
+	const githubActive = useColorModeValue({ bg: 'secondaryGray.300' }, { bg: 'whiteAlpha.200' });
+	const [show, setShow] = React.useState(false);
+	const [signInClicked, setSignInClicked] = useState(false);
 	const handleClick = () => setShow(!show);
+
 	return (
 		<DefaultAuthLayout illustrationBackground={'/img/auth/auth.png'}>
 			<Flex
@@ -104,9 +111,39 @@ export default function SignIn() {
 						fontWeight='500'
 						_hover={googleHover}
 						_active={googleActive}
-						_focus={googleActive}>
-						<Icon as={FcGoogle} w='20px' h='20px' me='10px' />
-						Sign in with Google
+						_focus={googleActive}
+						disabled={signInClicked}
+						onClick={() => {
+							setSignInClicked(true);
+							signIn('google');
+						}}>
+						<div>
+							<Icon as={FaGoogle} w='20px' h='20px' me='10px' />
+							<p>Sign In with Google</p>
+						</div>
+					</Button>
+					<Button
+						fontSize='sm'
+						me='0px'
+						mb='26px'
+						py='15px'
+						h='50px'
+						borderRadius='16px'
+						bgColor={githubBg}
+						color={githubText}
+						fontWeight='500'
+						_hover={githubHover}
+						_active={githubActive}
+						_focus={githubActive}
+						disabled={signInClicked}
+						onClick={() => {
+							setSignInClicked(true);
+							signIn('github');
+						}}>
+						<div>
+							<Icon as={FaGithub} w='20px' h='20px' me='10px' />
+							<p>Sign In with GitHub</p>
+						</div>
 					</Button>
 					<Flex align='center' mb='25px'>
 						<HSeparator />

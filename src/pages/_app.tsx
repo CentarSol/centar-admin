@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
 import React from 'react'
 import theme from 'theme/theme'
 
@@ -11,7 +12,7 @@ import 'react-calendar/dist/Calendar.css'
 import 'styles/MiniCalendar.css'
 import Head from 'next/head'
 
-function MyApp ({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Head>
@@ -20,7 +21,9 @@ function MyApp ({ Component, pageProps }: AppProps) {
         <meta name='theme-color' content='#000000' />
       </Head>
       <React.StrictMode>
-        <Component {...pageProps} />
+        <SessionProvider session={pageProps.session}>
+          <Component {...pageProps} />
+        </SessionProvider>
       </React.StrictMode>
     </ChakraProvider>
   )
