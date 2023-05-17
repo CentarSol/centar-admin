@@ -209,7 +209,7 @@ export default function SignIn() {
 								</a>
 							</Link>
 						</Flex>
-						<Button onClick={signIn('email')} fontSize='sm' variant='brand' fontWeight='500' w='100%' h='50' mb='24px'>
+						<Button onSubmit={signIn('email')} fontSize='sm' variant='brand' fontWeight='500' w='100%' h='50' mb='24px'>
 							Sign In
 						</Button>
 					</FormControl>
